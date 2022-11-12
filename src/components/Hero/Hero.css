@@ -1,0 +1,20 @@
+.hero-bg {
+    background-color: #E1F3F3;
+}
+
+
+.hero-contents h1 {
+    color: #0F3E3E;
+}
+
+.hero-contents p {
+    font-family: 'Outfit';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 160%;
+    /* or 131% */
+
+
+    color: #3D6666;
+}
