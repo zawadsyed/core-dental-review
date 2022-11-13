@@ -46,8 +46,8 @@ const Headers = () => {
                 <div className="navbar-center hidden lg:flex items-center">
                     <ul className="flex gap-6 rounded-3xl p-0">
                         <li><NavLink to='/services'>All Services</NavLink></li>
-                        <li><NavLink to='/reviews'>My Reviews</NavLink></li>
-                        <li><NavLink to='/reviews'>Add Service</NavLink></li>
+                        <li><NavLink to='/my-reviews'>My Reviews</NavLink></li>
+                        <li><NavLink to='/add-services'>Add Service</NavLink></li>
                     </ul>
                     <div className='flex items-center ml-24'>
                         {
