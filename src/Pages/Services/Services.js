@@ -4,6 +4,7 @@ import ServiceCard from '../../components/ServiceCard/ServiceCard';
 
 const Services = () => {
     const services = useLoaderData();
+
     return (
         <div>
             <section style={{ maxWidth: '1320px' }} className='mt-24 mx-auto'>

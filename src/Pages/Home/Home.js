@@ -6,7 +6,8 @@ import Hero from '../../components/Hero/Hero';
 import ServiceCard from '../../components/ServiceCard/ServiceCard';
 
 const Home = () => {
-    const services = useLoaderData();
+    const servicesData = useLoaderData();
+    const services = servicesData.sort((a, b) => (a._id < b._id) ? 1 : -1)
     // const services = servicesData.slice(0, 3)
     // console.log(services)
     return (

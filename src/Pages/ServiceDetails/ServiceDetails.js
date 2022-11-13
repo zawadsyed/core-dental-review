@@ -1,24 +1,58 @@
-import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useLoaderData, Link } from 'react-router-dom';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
+import Reviews from '../../components/Reviews/Reviews';
 
 const ServiceDetails = () => {
     const service = useLoaderData();
-    const { img, title, description, price, review } = service;
-    // const UserReview = {
-    //     img: img,
-    //     name: name,
-    //     review: message,
-    // }
+    const { _id, img, title, description, price, review } = service;
+    const { user } = useContext(AuthContext);
+    const [control, setControl] = useState(false);
+    const [serviceReviews, setServiceReviews] = useState([]);
+    console.log(serviceReviews)
 
     const handleReview = event => {
         event.preventDefault();
         const form = event.target;
-        const email = form.email.value;
-        const name = form.name.value;
         const textArea = form.textArea.value;
-        console.log(email, name, textArea);
+        console.log(textArea);
+
+        const review = {
+            service_id: _id,
+            reviewer: user?.displayName,
+            email: user?.email,
+            review: textArea,
+            reviewerImg: user?.photoURL
+        }
+
+        fetch('http://localhost:5000/reviews', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(review)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.acknowledged) {
+                    setControl(!control);
+                    form.reset();
+                }
+
+            })
+            .catch(error => {
+                console.error(error)
+            })
+
     }
 
+    useEffect(() => {
+        fetch(`http://localhost:5000/reviews?service_id=${_id}`)
+            .then(res => res.json())
+            .then(data => setServiceReviews(data))
+
+    }, [control])
 
 
     return (
@@ -39,34 +73,38 @@ const ServiceDetails = () => {
                     </div>
                 </div >
             </section>
-            <form onSubmit={handleReview}>
-                <div className="card mx-auto bg-base-100 shadow-xl p-12 flex justify-center items-center">
-                    <div>
-                        <input type="email" placeholder="Your Email Here" className="input input-bordered input-primary w-full max-w-xs" name="email" /> <br />
-                        <input type="text" placeholder="Your Name Here" className="mt-4 input input-bordered input-primary w-full max-w-xs" name="name" /> <br />
-                        <textarea className="mt-4 textarea textarea-primary w-full max-w-xs" placeholder="Provide Your Review" name="textArea"></textarea>
-                        <input className="btn btn-primary capitalize w-full mt-4 max-w-xs" type="submit" value="Comment" />
-                    </div>
-                </div>
-            </form>
-            {/* <section>
-                <div style={{ maxWidth: '1320px' }} className="carousel w-full mx-auto">
-                    <div className="card w-96 bg-base-100 shadow-xl">
-                        <div className="avatar">
-                            <div className="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                                <img src="https://placeimg.com/192/192/people" />
-                            </div>
+            <section>
+                <div style={{ maxWidth: '1320px' }} className="w-full mx-auto mt-24">
+                    <form onSubmit={handleReview}>
+
+                        <div className="card mx-auto bg-base-100 shadow-xl p-12 flex justify-center items-center">
+                            {
+                                !user?.uid ? <><h3>You need to <Link to='/login'> Log In </Link>to give review</h3>
+                                    <div>
+                                        <textarea className="mt-4 textarea textarea-primary w-full max-w-xs" placeholder="Provide Your Review" name="textArea" required disabled={!user?.uid}></textarea>
+                                        <input className="btn btn-primary capitalize w-full mt-4 max-w-xs" type="submit" value="Comment" />
+                                    </div>
+                                </>
+                                    :
+                                    <div>
+                                        <textarea className="mt-4 textarea textarea-primary w-full max-w-xs" placeholder="Provide Your Review" name="textArea" required disabled={!user?.uid}></textarea>
+                                        <input className="btn btn-primary capitalize w-full mt-4 max-w-xs" type="submit" value="Comment" />
+                                    </div>
+                            }
+
                         </div>
-                        <div className="card-body">
-                            <h2 className="card-title">Card title!</h2>
-                            <p>If a dog chews shoes whose shoes does he choose?</p>
-                            <div className="card-actions justify-end">
-                                <button className="btn btn-primary">Buy Now</button>
-                            </div>
-                        </div>
+                    </form>
+                    <div className='my-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+                        {
+                            serviceReviews.map(serviceReview => <Reviews
+                                key={serviceReview._id}
+                                serviceReview={serviceReview}
+                            ></Reviews>)
+                        }
                     </div>
+
                 </div>
-            </section> */}
+            </section>
         </div>
 
 
