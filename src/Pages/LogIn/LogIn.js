@@ -33,7 +33,7 @@ const LogIn = () => {
             <div className="hero min-h-screen bg-base-200">
                 <div className="hero-content flex-col">
                     <div className="text-center lg:text-center">
-                        <h1 className="text-4xl font-bold">Please Register now!</h1>
+                        <h1 className="text-4xl font-bold">Please Log In Here!</h1>
                     </div>
                     {/* form starts here */}
                     <form onSubmit={handleLogIn} className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
@@ -51,13 +51,13 @@ const LogIn = () => {
                                 <input type="password" name='password' placeholder="password" className="input input-bordered" required />
                                 <label className="label">
                                     <button className="btn btn-link">
-                                        <Link to='/register'>Don't have an account?? Register</Link>
+                                        <Link to='/register'>Don't have an account??</Link>
                                     </button>
                                 </label>
                                 <p className='text-red-400'>{error}</p>
                             </div>
                             <div className="form-control mt-6">
-                                <button className="btn btn-primary capitalize">Register</button>
+                                <button className="btn btn-primary capitalize">Log In</button>
                             </div>
                         </div>
                     </form>
