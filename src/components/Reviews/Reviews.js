@@ -4,6 +4,7 @@ const Reviews = ({ serviceReview }) => {
     const { review, reviewer, reviewerImg } = serviceReview;
     return (
         <div>
+
             <div className="card p-6 bg-base-100 shadow-xl">
                 <div className="avatar">
                     <div className="w-16 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
