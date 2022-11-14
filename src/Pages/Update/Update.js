@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import useDynamicTitle from '../../hooks/useDynamicTitle';
 
 const Update = () => {
+    useDynamicTitle('Update Review');
     const myReview = useLoaderData();
     const { _id, reviewer, review, reviewerImg, service_id, email } = myReview;
     const [serviceReview, setServiceReview] = useState({});

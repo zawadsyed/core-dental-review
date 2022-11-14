@@ -2,10 +2,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useLoaderData, Link } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import Reviews from '../../components/Reviews/Reviews';
+import useDynamicTitle from '../../hooks/useDynamicTitle';
 
 const ServiceDetails = () => {
     const service = useLoaderData();
     const { _id, img, title, description, price } = service;
+    useDynamicTitle(`${title}`)
     const { user } = useContext(AuthContext);
     const [control, setControl] = useState(false);
     const [serviceReviews, setServiceReviews] = useState([]);

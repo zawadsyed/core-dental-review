@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import ClipLoader from 'react-spinners/ClipLoader';
 
 import ServiceCard from '../../components/ServiceCard/ServiceCard';
+import useDynamicTitle from '../../hooks/useDynamicTitle';
 
 const Services = () => {
+    useDynamicTitle('All Services');
     const [services, setServices] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {

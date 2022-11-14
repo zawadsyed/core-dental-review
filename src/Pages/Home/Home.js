@@ -4,10 +4,13 @@ import img from '../../assets/images/dentistry-right.png';
 import img01 from '../../assets/images/dentist-friendly.png'
 import Hero from '../../components/Hero/Hero';
 import ServiceCard from '../../components/ServiceCard/ServiceCard';
+import useDynamicTitle from '../../hooks/useDynamicTitle';
 
 const Home = () => {
+    useDynamicTitle('Home');
     const servicesData = useLoaderData();
-    const services = servicesData.sort((a, b) => (a._id < b._id) ? 1 : -1);
+    // const services = servicesData.sort((a, b) => (a._id < b._id) ? 1 : -1);
+    const services = servicesData.sort((a, b) => (a._id < b._id) ? 3 : -1);
     return (
         <div>
             <Hero></Hero>

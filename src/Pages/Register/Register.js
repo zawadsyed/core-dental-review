@@ -1,8 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
+import useDynamicTitle from '../../hooks/useDynamicTitle';
 
 const Register = () => {
+    useDynamicTitle('Register');
     const { createUser, updateUserProfile } = useContext(AuthContext);
     const [error, setError] = useState(null);
     const navigate = useNavigate();

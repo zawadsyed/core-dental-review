@@ -3,8 +3,10 @@ import { AuthContext } from '../../AuthProvider/AuthProvider';
 import ReviewRow from '../../components/ReviewRow/ReviewRow';
 import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom';
+import useDynamicTitle from '../../hooks/useDynamicTitle';
 
 const MyReviews = () => {
+    useDynamicTitle('My Reviews');
     const { user } = useContext(AuthContext);
     const [myReviews, setMyReviews] = useState([]);
     const navigate = useNavigate();

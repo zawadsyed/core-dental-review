@@ -1,10 +1,15 @@
+import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
+import { FcGoogle } from "react-icons/fc";
+import useDynamicTitle from '../../hooks/useDynamicTitle';
 
 const LogIn = () => {
-    const { logIn } = useContext(AuthContext);
+    useDynamicTitle('Log In');
+    const { logIn, providerSignIn } = useContext(AuthContext);
     const [error, setError] = useState(null);
+    const provider = new GoogleAuthProvider()
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
@@ -26,6 +31,19 @@ const LogIn = () => {
                 console.error(error);
                 setError(`${error.message}, Please try again`);
                 form.reset();
+            })
+    }
+    const handleSignInGoogle = () => {
+        providerSignIn(provider)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                setError('');
+                navigate(from, { replace: true })
+            })
+            .catch(error => {
+                console.error(error)
+                setError(`${error.message}, Please try again`);
             })
     }
     return (
@@ -61,6 +79,8 @@ const LogIn = () => {
                             </div>
                         </div>
                     </form>
+                    <div className="divider">OR</div>
+                    <button className='btn btn-success bg-white capitalize' onClick={handleSignInGoogle}><FcGoogle className='mr-2'></FcGoogle>Sign In with Google</button>
                 </div>
             </div>
         </div>
