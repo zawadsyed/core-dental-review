@@ -2,10 +2,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import ReviewRow from '../../components/ReviewRow/ReviewRow';
 import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom';
 
 const MyReviews = () => {
     const { user } = useContext(AuthContext);
     const [myReviews, setMyReviews] = useState([]);
+    const navigate = useNavigate();
     console.log(myReviews)
     useEffect(() => {
         fetch(`http://localhost:5000/my-reviews?email=${user?.email}`)
@@ -25,7 +27,7 @@ const MyReviews = () => {
                     if (data.deletedCount > 0) {
                         Swal.fire(
                             'Good job!',
-                            'You clicked the button!',
+                            'You deleted the review successfully',
                             'success'
                         )
                         const remainingReview = myReviews.filter(review => review._id !== id);
@@ -34,6 +36,9 @@ const MyReviews = () => {
                 })
         }
     }
+    const handleUpdate = id => [
+        navigate(`/my-reviews/${id}`)
+    ]
     return (
         <div>
             <div className="overflow-x-auto w-full">
@@ -51,6 +56,7 @@ const MyReviews = () => {
                         {myReviews.map(myReview => <ReviewRow key={myReview._id}
                             myReview={myReview}
                             handleDelete={handleDelete}
+                            handleUpdate={handleUpdate}
                         ></ReviewRow>)}
                     </tbody>
                 </table>

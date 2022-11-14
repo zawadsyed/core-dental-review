@@ -27,7 +27,8 @@ const Services = () => {
                             <div className='mt-16'>
                                 <ClipLoader color="#36d7b7" />
                             </div>
-                            : <div className='my-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>{
+                            :
+                            <div className='my-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>{
                                 services.map(service => <ServiceCard
                                     key={service._id}
                                     service={service}

@@ -5,7 +5,7 @@ import Reviews from '../../components/Reviews/Reviews';
 
 const ServiceDetails = () => {
     const service = useLoaderData();
-    const { _id, img, title, description, price, review } = service;
+    const { _id, img, title, description, price } = service;
     const { user } = useContext(AuthContext);
     const [control, setControl] = useState(false);
     const [serviceReviews, setServiceReviews] = useState([]);
@@ -71,8 +71,8 @@ const ServiceDetails = () => {
                 <div style={{ maxWidth: '1320px' }} className='mx-auto'>
                     <div className="card card-compact">
                         <div className="card-body p-4">
-                            <h1 style={{ color: '#0F3E3E' }} className="flex items-start text-6xl font-extrabold leading-tight text-left">{title}
-                                <span className="badge badge-success font-normal text-lg">{review.rating}</span>
+                            <h1 style={{ color: '#0F3E3E' }} className="text-6xl font-extrabold leading-tight text-left">{title}
+
                             </h1>
                             <p style={{
                                 fontWeight: '400', fontSize: '24px', lineHeight: '160%', color: '#3D6666'
@@ -90,7 +90,7 @@ const ServiceDetails = () => {
 
                         <div className="card mx-auto bg-base-100 shadow-xl p-12 flex justify-center items-center">
                             {
-                                !user?.uid ? <><h3>You need to <Link to='/login'> Log In </Link>to give review</h3>
+                                !user?.uid ? <><h3>You need to <Link className='text-green-700' to='/login'> Log In </Link>to give review</h3>
                                     <div>
                                         <textarea className="mt-4 textarea textarea-primary w-full max-w-xs" placeholder="Provide Your Review" name="textArea" required disabled={!user?.uid}></textarea>
                                         <input className="btn btn-primary capitalize w-full mt-4 max-w-xs" type="submit" value="Comment" disabled={!user?.uid} />

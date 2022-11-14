@@ -18,15 +18,19 @@ const Headers = () => {
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>
                         <ul tabIndex={0} className="menu w-56 rounded-box menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                            {/* <li>{user.uid &&
-                                <img src={user.photoURL} alt="" />
-                            }</li>
-                            <li>{user.uid &&
-                                <p>{user.displayName}</p>
-                            }</li> */}
-                            <li><NavLink to='/services'>All Services</NavLink></li>
-                            <li><NavLink to='/reviews'>My Reviews</NavLink></li>
-                            <li><NavLink to='/reviews'>Add Service</NavLink></li>
+                            {
+                                user?.uid ? <>
+                                    <li><NavLink to='/my-reviews'>My Reviews</NavLink></li>
+                                    <li><NavLink to='/add-services'>Add Service</NavLink></li>
+                                    <li><NavLink to='/services'>All Services</NavLink></li>
+                                    <li><NavLink to='/blogs'>Blogs</NavLink></li>
+                                </>
+                                    :
+                                    <>
+                                        <li><NavLink to='/services'>All Services</NavLink></li>
+                                        <li><NavLink to='/blogs'>Blogs</NavLink></li>
+                                    </>
+                            }
                             {
                                 user?.uid
                                     ?
@@ -45,9 +49,20 @@ const Headers = () => {
                 </div>
                 <div className="navbar-center hidden lg:flex items-center">
                     <ul className="flex gap-6 rounded-3xl p-0">
-                        <li><NavLink to='/services'>All Services</NavLink></li>
-                        <li><NavLink to='/my-reviews'>My Reviews</NavLink></li>
-                        <li><NavLink to='/add-services'>Add Service</NavLink></li>
+                        {
+                            user?.uid ? <>
+                                <li><NavLink to='/my-reviews'>My Reviews</NavLink></li>
+                                <li><NavLink to='/add-services'>Add Service</NavLink></li>
+                                <li><NavLink to='/services'>All Services</NavLink></li>
+                                <li><NavLink to='/blogs'>Blogs</NavLink></li>
+                            </>
+                                :
+                                <>
+                                    <li><NavLink to='/services'>All Services</NavLink></li>
+                                    <li><NavLink to='/blogs'>Blogs</NavLink></li>
+                                </>
+                        }
+
                     </ul>
                     <div className='flex items-center ml-24'>
                         {
