@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const ReviewRow = ({ myReview, handleDelete, handleUpdate }) => {
+
     const { _id, reviewer, review, reviewerImg, service_id } = myReview;
+
+    // review according to service state
     const [serviceReview, setServiceReview] = useState({});
+    // for single review info
     useEffect(() => {
-        fetch(`http://localhost:5000/services/${service_id}`)
+        fetch(`https://core-dental-review-server.vercel.app/services/${service_id}`)
             .then(res => res.json())
             .then(data => setServiceReview(data))
             .catch(error => console.error(error))
@@ -25,7 +30,10 @@ const ReviewRow = ({ myReview, handleDelete, handleUpdate }) => {
                     </div>
                     <div>
                         <div className="font-bold">{reviewer}</div>
-                        <div className="text-sm opacity-50">{serviceReview.title}</div>
+                        <Link to={`/services/${service_id}`}>
+                            <div className="text-sm opacity-50">Service: {serviceReview.title}</div>
+                        </Link>
+
                     </div>
                 </div>
             </td>

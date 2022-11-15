@@ -1,5 +1,6 @@
 import React from 'react';
 import img from '../../assets/images/dentist.png';
+import { Link } from 'react-router-dom';
 import './Hero.css'
 
 const Hero = () => {
@@ -11,7 +12,10 @@ const Hero = () => {
                     <div className='hero-contents flex flex-col items-start'>
                         <h1 className="text-6xl font-extrabold leading-tight text-left">For All-Round <br /> Healthy Smiles</h1>
                         <p className="py-6 text-left">Comprehensive general and <br />cosmetic dentistry by Dr.Filler</p>
-                        <button className="btn btn-primary capitalize text-lg px-6">Get Started</button>
+                        <Link to='/services'>
+                            <button className="btn btn-primary capitalize text-lg px-6">Get Started</button>
+                        </Link>
+
                     </div>
                 </div>
             </div>

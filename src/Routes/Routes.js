@@ -2,6 +2,8 @@ import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import Main from '../layouts/Main';
 import AddServices from '../Pages/AddServices/AddServices';
+import Blog from '../Pages/Blog/Blog';
+import ErrorPage from '../Pages/ErrorPage/ErrorPage';
 import Home from '../Pages/Home/Home';
 import LogIn from '../Pages/LogIn/LogIn';
 import MyReviews from '../Pages/MyReviews/MyReviews';
@@ -14,11 +16,12 @@ import PrivateRoute from './PrivateRoute';
 const router = createBrowserRouter([
     {
         path: '/',
+        errorElement: <ErrorPage></ErrorPage>,
         element: <Main></Main>,
         children: [
             {
                 path: '/',
-                loader: () => fetch('http://localhost:5000/home/services'),
+                loader: () => fetch('https://core-dental-review-server.vercel.app/home/services'),
                 element: <Home></Home>
 
             },
@@ -29,7 +32,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/services/:id',
-                loader: ({ params }) => fetch(`http://localhost:5000/services/${params.id}`),
+                loader: ({ params }) => fetch(`https://core-dental-review-server.vercel.app/services/${params.id}`),
                 element: <ServiceDetails></ServiceDetails>
 
             },
@@ -54,8 +57,12 @@ const router = createBrowserRouter([
             },
             {
                 path: '/my-reviews/:id',
-                loader: ({ params }) => fetch(`http://localhost:5000/my-reviews/${params.id}`),
+                loader: ({ params }) => fetch(`https://core-dental-review-server.vercel.app/my-reviews/${params.id}`),
                 element: <PrivateRoute><Update></Update></PrivateRoute>
+            },
+            {
+                path: '/blogs',
+                element: <Blog></Blog>
             },
         ]
     }

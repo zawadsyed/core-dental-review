@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Swal from 'sweetalert2';
 import useDynamicTitle from '../../hooks/useDynamicTitle';
 
@@ -11,14 +10,15 @@ const AddServices = () => {
         const img = form.img.value;
         const price = form.price.value;
         const description = form.description.value;
-
+        // service object to add new service
         const service = {
             title,
             img,
             price,
             description
         }
-        fetch('http://localhost:5000/home/services', {
+        // for sending data to home page services api
+        fetch('https://core-dental-review-server.vercel.app/home/services', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

@@ -8,13 +8,15 @@ const Services = () => {
     useDynamicTitle('All Services');
     const [services, setServices] = useState([]);
     const [loading, setLoading] = useState(true);
+    // for getting all services
     useEffect(() => {
-        fetch('http://localhost:5000/services')
+        fetch('https://core-dental-review-server.vercel.app/services')
             .then(result => result.json())
             .then(data => {
                 setServices(data);
-                setLoading(false)
+                setLoading(false);
             })
+            .catch(error => console.error(error))
     }, [])
 
 

@@ -8,9 +8,7 @@ import useDynamicTitle from '../../hooks/useDynamicTitle';
 
 const Home = () => {
     useDynamicTitle('Home');
-    const servicesData = useLoaderData();
-    // const services = servicesData.sort((a, b) => (a._id < b._id) ? 1 : -1);
-    const services = servicesData.sort((a, b) => (a._id < b._id) ? 3 : -1);
+    const services = useLoaderData();
     return (
         <div>
             <Hero></Hero>
@@ -36,7 +34,8 @@ const Home = () => {
                         <div className='flex flex-col items-start'>
                             <h1 style={{ color: '#0F3E3E' }} className='mt-2 text-left text-5xl font-semibold'>Dentistry Done Right</h1>
                             <p style={{ color: '#3D6666' }} className="py-6 text-left">Adults and kids, I welcome patients of all ages! <br /> I am passionate about building lifetime relationships <br /> through positive experiences</p>
-                            <button className="btn btn-primary capitalize text-lg px-6">Learn More</button>
+                            <Link to='/blogs'><button className="btn btn-primary capitalize text-lg px-6">Learn More</button></Link>
+
                         </div>
                     </div>
                 </div>
@@ -49,7 +48,7 @@ const Home = () => {
                             <p style={{ color: '#3D6666' }} className='text-left text-sm tracking-wider'>TRANSPARENT PRICING</p>
                             <h1 style={{ color: '#0F3E3E' }} className='mt-2 text-left text-5xl font-semibold'>No Surprises</h1>
                             <p style={{ color: '#3D6666' }} className="py-6 text-left">I believe in accessible dental care. <br /> I offer straightforward pricing, clear estimates, <br /> and an unprecedented dental warranty. <br /> Keep up with your routine 6-month checkups <br /> and if something needs fixing, I’ll handle it at no cost to you.</p>
-                            <button className="btn btn-primary capitalize text-lg px-6">Learn More</button>
+                            <Link to='/blogs'><button className="btn btn-primary capitalize text-lg px-6">Learn More</button></Link>
                         </div>
                     </div>
                 </div>

@@ -3,6 +3,7 @@ import { useLoaderData, Link } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import Reviews from '../../components/Reviews/Reviews';
 import useDynamicTitle from '../../hooks/useDynamicTitle';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
 
 const ServiceDetails = () => {
     const service = useLoaderData();
@@ -19,7 +20,7 @@ const ServiceDetails = () => {
         const form = event.target;
         const textArea = form.textArea.value;
         console.log(textArea);
-
+        // review object to add review
         const review = {
             service_id: _id,
             reviewer: user?.displayName,
@@ -27,8 +28,8 @@ const ServiceDetails = () => {
             review: textArea,
             reviewerImg: user?.photoURL
         }
-
-        fetch('http://localhost:5000/reviews', {
+        // to send new review to the server
+        fetch('https://core-dental-review-server.vercel.app/reviews', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -49,9 +50,9 @@ const ServiceDetails = () => {
             })
 
     }
-
+    // for loading reviews according to the specific service
     useEffect(() => {
-        fetch(`http://localhost:5000/reviews?service_id=${_id}`)
+        fetch(`https://core-dental-review-server.vercel.app/reviews?service_id=${_id}`)
             .then(res => res.json())
             .then(data => {
                 if (data.length === 0) {
@@ -69,7 +70,7 @@ const ServiceDetails = () => {
 
     return (
         <div>
-            <section>
+            <section className='mt-24'>
                 <div style={{ maxWidth: '1320px' }} className='mx-auto'>
                     <div className="card card-compact">
                         <div className="card-body p-4">
@@ -79,9 +80,14 @@ const ServiceDetails = () => {
                             <p style={{
                                 fontWeight: '400', fontSize: '24px', lineHeight: '160%', color: '#3D6666'
                             }} className='text-left pb-4'>{description}</p>
-                            <p className='text-left text-3xl text-cyan-900 font-extrabold pb-4'>${price}</p>
+                            <p className='text-left text-3xl text-cyan-900 font-extrabold pb-4'>Service Cost: ${price}</p>
                         </div>
-                        <figure><img src={img} alt={title} /></figure>
+                        <PhotoProvider>
+                            <PhotoView src={img}>
+                                <img className='object-cover w-full' src={img} alt={title} />
+                            </PhotoView>
+
+                        </PhotoProvider>
                     </div>
                 </div >
             </section>
@@ -109,7 +115,7 @@ const ServiceDetails = () => {
                     </form>
                     <h1 style={{ color: '#0F3E3E' }} className='mt-24 text-center text-5xl font-semibold'>What People say about my service</h1>
                     <h1 className='text-red-400 font-semibold mt-8'>{empty}</h1>
-                    <div className='my-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+                    <div className='my-12 grid grid-cols-1 md:grid-cols-2 gap-6'>
                         {
                             serviceReviews.map(serviceReview => <Reviews
                                 key={serviceReview._id}

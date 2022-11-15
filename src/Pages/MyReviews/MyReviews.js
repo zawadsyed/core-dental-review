@@ -12,7 +12,7 @@ const MyReviews = () => {
     const navigate = useNavigate();
     console.log(myReviews)
     useEffect(() => {
-        fetch(`http://localhost:5000/my-reviews?email=${user?.email}`)
+        fetch(`https://core-dental-review-server.vercel.app/my-reviews?email=${user?.email}`)
             .then(res => res.json())
             .then(data => setMyReviews(data))
             .catch(error => console.error(error))
@@ -21,7 +21,8 @@ const MyReviews = () => {
     const handleDelete = id => {
         const confirmation = window.confirm('Are you sure to delete the Review??');
         if (confirmation) {
-            fetch(`http://localhost:5000/my-reviews/${id}`, {
+            // delete api
+            fetch(`https://core-dental-review-server.vercel.app/my-reviews/${id}`, {
                 method: 'DELETE',
             })
                 .then(res => res.json())

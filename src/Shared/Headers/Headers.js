@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
+import logo from '../../assets/images/logo-light.png'
 
 const Headers = () => {
     const { user, logOut } = useContext(AuthContext);
@@ -45,7 +46,7 @@ const Headers = () => {
                         </ul>
 
                     </div>
-                    <Link to='/'>HAHAH</Link>
+                    <Link to='/'><img className='w-40' src={logo} alt="" /></Link>
                 </div>
                 <div className="navbar-center hidden lg:flex items-center">
                     <ul className="flex gap-6 rounded-3xl p-0">
