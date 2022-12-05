@@ -1,18 +1,12 @@
-# Wiz Resale React App
+#   Core Dental Review React App
 
 This project was initially created with npx create-react-app
 
 ## Live Site
-A demo of this project is available at https://wiz-resale.web.app
+A demo of this project is available at https://core-dental-review.web.app/
 ## Features
-* The app is a Single page application as it has been created using Tailwind, daisyUI, react router dom, context api, firbase, express, mongodb, vercel.
-* This app is a resale platform. There categories and under every category there are products to book to purchase. Buyer Can Book Those resale product.
-* Seller can add a product then can it in my products library.
-* Adnin can see the all users and can delete any user.
-* There is another route named blogs.
-* Node,express and mongodb has been used in the backend to load data and display it to UI.
-
-## Admin Credential
-adminEmail: <syedzawadd@gmail.com>
-
-adminPassword: <12345678>
+* The app is a Single page application as it has been created using Tailwind, daisyUI, react router dom, context api, firbase.
+* This app is a review platform for a dental service. There are services under dental categories and you can see a whole lot details in single service page.
+* anyone who logs in, can add a service then can see it in homepage.
+* Users can review services if they are logged in.
+* Any user can delete his/her reviews in my reviews page.
